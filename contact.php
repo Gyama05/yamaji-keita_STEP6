@@ -10,7 +10,7 @@
 
 <body>
     <header>
-        <h1>お問い合わせフォーム</h1>
+        <h2>お問い合わせフォーム</h2>
     </header>
     <div class="sidebar">
         <ul>
@@ -32,8 +32,9 @@
                     <th>会社名</th>
                     <td><input type="text" name="company" id="company"></td>
                 </tr>
-                <th>メールアドレス</th>
-                <td><input type="email" name="email" id="email"></td>
+                <tr>
+                    <th>メールアドレス</th>
+                    <td><input type="email" name="email" id="email"></td>
                 </tr>
                 <tr>
                     <th>年齢</th>
@@ -45,7 +46,7 @@
                 </tr>
             </table>
             <div class="button">
-                <button type="submit" class="submit-button">送信</button>
+                <input type="submit" class="submit-button"></input>
             </div>
         </form>
     </div>

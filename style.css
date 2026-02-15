@@ -12,7 +12,15 @@ td {
 }
 
 /* 入力エリアの横幅40文字 */
-input,
-textarea {
+table input,
+table textarea {
     width: 40ch;
+}
+
+/* ボタン調整 */
+.button-confirm {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 43px;
 }
