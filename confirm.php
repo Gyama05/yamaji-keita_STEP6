@@ -22,29 +22,52 @@
         </ul>
     </div>
     <div>
-        <form action="confirm.php" method="post">
-            <table class="table">
-                <tr>
-                    <th>お名前</th>
-                    <td><?php echo $_POST["name"] ?></td>
-                </tr>
-                <tr>
-                    <th>会社名</th>
-                    <td><?php echo $_POST["company"] ?></td>
-                </tr>
-                <tr>
-                    <th>メールアドレス</th>
-                    <td><?php echo $_POST["email"] ?></td>
-                </tr>
-                <tr>
-                    <th>年齢</th>
-                    <td><?php echo $_POST["age"] ?></td>
-                </tr>
-                <tr>
-                    <th>お問い合わせ内容</th>
-                    <td><?php echo $_POST["message"] ?></td>
-                </tr>
-            </table>
+        <form action="send.php" method="post">
+
+            <?php
+            // POST以外（フォーム以外）からのアクセスは contact.php へリダイレクト
+            if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+                header("Location: contact.php");
+                exit;
+            }
+
+            $username = $_POST["name"];
+            $company = $_POST["company"];
+            $email = $_POST["email"];
+            $age = $_POST["age"];
+            $message = $_POST["message"];
+
+            // 空欄チェック（どれか1つでも空ならエラー）
+            if (empty($username) || empty($company) || empty($email) || empty($age) || empty($message)) {
+                echo "<p>入力されていない項目があります。</p>";
+            }
+            // バリデーション
+            elseif (!preg_match("/^[\p{Han}\p{Hiragana}\p{Katakana}a-zA-Z\s'-]+$/u", $username)) {
+                echo "<p>お名前は日本語または英字のみで入力してください。</p>";
+            } elseif (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email)) {
+                echo "<p>正しい形式のメールアドレスを入力してください。</p>";
+            } elseif (!preg_match("/^[ぁ-んァ-ヶー一-龠a-zA-Z0-9０-９\s。、！!？?（）()「」『』\-・…]+$/u", $message)) {
+                echo "<p>お問い合わせ内容に使用できない文字が含まれています。</p>";
+            } else {
+                // 入力内容の表示（テーブル形式）
+                echo '<table class="table">';
+                echo "<tr><th>お名前</th><td>" . htmlspecialchars($username, ENT_QUOTES, 'UTF-8') . "</td></tr>";
+                echo "<tr><th>会社名</th><td>" . htmlspecialchars($company, ENT_QUOTES, 'UTF-8') . "</td></tr>";
+                echo "<tr><th>メールアドレス</th><td>" . htmlspecialchars($email, ENT_QUOTES, 'UTF-8') . "</td></tr>";
+                echo "<tr><th>年齢</th><td>" . htmlspecialchars($age, ENT_QUOTES, 'UTF-8') . "</td></tr>";
+                echo "<tr><th>お問い合わせ内容</th><td>" . nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8')) . "</td></tr>";
+                echo '</table>';
+
+            // send.php に渡す hidden
+            echo '<input type="hidden" name="name" value="' . htmlspecialchars($username, ENT_QUOTES, 'UTF-8') . '">';
+            echo '<input type="hidden" name="company" value="' . htmlspecialchars($company, ENT_QUOTES, 'UTF-8') . '">';
+            echo '<input type="hidden" name="email" value="' . htmlspecialchars($email, ENT_QUOTES, 'UTF-8') . '">';
+            echo '<input type="hidden" name="age" value="' . htmlspecialchars($age, ENT_QUOTES, 'UTF-8') . '">';
+            echo '<input type="hidden" name="message" value="' . htmlspecialchars($message, ENT_QUOTES, 'UTF-8') . '">';
+            }
+
+            ?>
+
             <div class="button-confirm">
                 <input type="submit" class="submit-button"></input>
                 <button type="button" onclick="history.back();">戻る</button>
