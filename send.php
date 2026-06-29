@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 
 // POSTデータ受け取り
 $name = htmlspecialchars($_POST['name'] ?? '', ENT_QUOTES, 'UTF-8');
-$company = htmlspecialchars($_POST['company'] ?? '', ENT_QUOTES, 'UTF-8');
+$companyName = htmlspecialchars($_POST['companyName'] ?? '', ENT_QUOTES, 'UTF-8');
 $email = htmlspecialchars($_POST['email'] ?? '', ENT_QUOTES, 'UTF-8');
 $age = htmlspecialchars($_POST['age'] ?? '', ENT_QUOTES, 'UTF-8');
 $message = htmlspecialchars($_POST['message'] ?? '', ENT_QUOTES, 'UTF-8');
@@ -45,12 +45,10 @@ $success = true;
     </div>
 
     <div class="rink">
-        <a href="http://localhost:8888/yamaji-keita_STEP6/contact.php">
+        <a href="contact.php">
             お問い合わせフォームに戻る 
         </a>
     </div>
-
-    <script src="script.js"></script>
 </body>
 
 </html>

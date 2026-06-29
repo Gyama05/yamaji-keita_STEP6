@@ -30,7 +30,7 @@
                 </tr>
                 <tr>
                     <th>会社名</th>
-                    <td><input type="text" name="company" id="company"></td>
+                    <td><input type="text" name="companyName" id="companyName"></td>
                 </tr>
                 <tr>
                     <th>メールアドレス</th>
@@ -54,7 +54,7 @@
         <p>横のボタンを押すとfooterの背景色が変わります。</p>
         <button id="btn">押してみてね！</button>
     </footer>
-    <script src="script.js"></script>
+    <script src="style.js"></script>
 </body>
 
 </html>
